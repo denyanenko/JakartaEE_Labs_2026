@@ -26,7 +26,7 @@ public class MemberServlet extends HttpServlet {
             linkedin = "https://www.linkedin.com/in/mykhailo-shylo-b0911221b/";
             photo = "Shylo.png";
         } else if ("bondarchuk".equals(id)) {
-            fullName = "Олександр Бондарчук";
+            fullName = "Бондарчук Олександр";
             linkedin = "https://www.linkedin.com/in/oleksandr-bondarchuk-71152527b/";
             photo = "Bondarchuk.png";
         } else if ("yanenko".equals(id)) {
