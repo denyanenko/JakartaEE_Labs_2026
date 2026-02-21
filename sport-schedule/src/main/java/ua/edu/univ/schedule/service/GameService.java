@@ -44,6 +44,21 @@ public class GameService {
                 .collect(Collectors.toList());
     }
 
+    public List<Game> getPagedGames(int page, int size, String teamName) {
+        List<Game> filtered = games.stream()
+                .filter(game -> teamName == null || teamName.isEmpty() ||
+                        game.getHomeTeam().getName().toLowerCase().contains(teamName.toLowerCase()) ||
+                        game.getAwayTeam().getName().toLowerCase().contains(teamName.toLowerCase()))
+                .collect(Collectors.toList());
+
+        int fromIndex = (page - 1) * size;
+        if (fromIndex >= filtered.size()) {
+            return new ArrayList<>();
+        }
+        int toIndex = Math.min(fromIndex + size, filtered.size());
+        return filtered.subList(fromIndex, toIndex);
+    }
+
     public Optional<Game> getGameById(Long id) {
         return games.stream().filter(g -> g.getId().equals(id)).findFirst();
     }
