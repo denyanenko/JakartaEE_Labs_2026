@@ -22,17 +22,4 @@ public class Team {
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Team team = (Team) o;
-        return name != null ? name.equalsIgnoreCase(team.name) : team.name == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return name != null ? name.toLowerCase().hashCode() : 0;
-    }
 }
