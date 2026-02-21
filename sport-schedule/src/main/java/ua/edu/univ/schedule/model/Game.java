@@ -4,9 +4,11 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import ua.edu.univ.schedule.validation.DifferentTeams;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @DifferentTeams
 public class Game {
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
     private Long id;
 
     @NotNull(message = "Home team cannot be null")
@@ -49,4 +51,12 @@ public class Game {
 
     public GameResult getResult() { return result; }
     public void setResult(GameResult result) { this.result = result; }
+
+    public String getFormattedDateTime() {
+        return dateTime != null ? dateTime.format(FORMATTER) : "";
+    }
+
+    public String getFormDateTime() {
+        return dateTime != null ? dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")) : "";
+    }
 }

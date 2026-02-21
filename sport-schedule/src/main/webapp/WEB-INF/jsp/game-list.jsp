@@ -261,7 +261,7 @@
                             <c:forEach var="game" items="${games}">
                                 <tr>
                                     <td>
-                                        <c:out value="${game.dateTime}" />
+                                        <c:out value="${game.formattedDateTime}" />
                                     </td>
                                     <td>
                                         <span class="team-name">

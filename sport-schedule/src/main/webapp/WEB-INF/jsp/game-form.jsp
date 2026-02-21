@@ -133,7 +133,7 @@
 
                     <div class="form-group">
                         <label>Дата та час</label>
-                        <input type="datetime-local" name="dateTime" value="${game.dateTime}" required>
+                        <input type="datetime-local" name="dateTime" value="${game.formDateTime}" required>
                     </div>
 
                     <div class="row">
