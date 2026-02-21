@@ -21,6 +21,8 @@ public class MemberServlet extends HttpServlet {
         String linkedin = "#";
         String photo = "";
 
+        String path = request.getContextPath();
+
         if ("shylo".equals(id)) {
             fullName = "Шило Михайло";
             linkedin = "https://www.linkedin.com/in/mykhailo-shylo-b0911221b/";
@@ -48,7 +50,7 @@ public class MemberServlet extends HttpServlet {
             out.println("<p>LinkedIn: <a href='" + linkedin + "' target='_blank'>Профіль користувача</a></p>");
 
             out.println("<hr>");
-            out.println("<a href='index.html'>Повернутися на головну</a>");
+            out.println("<a href='" + path + "/'>Повернутися на головну</a>");
             out.println("</body></html>");
         }
     }
