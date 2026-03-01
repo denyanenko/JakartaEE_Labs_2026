@@ -1,5 +1,6 @@
 package ua.edu.univ.schedule.resource;
 
+import jakarta.ejb.EJB;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -13,8 +14,8 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class GameResource {
-
-    private final GameService gameService = new GameService();
+    @EJB //lab4
+    private GameService gameService;
 
     @GET
     public Response getGames(

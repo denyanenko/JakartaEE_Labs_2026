@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import jakarta.ejb.Stateless;
 
+@Stateless //lab4
 public class GameService {
     private static final List<Game> games = new ArrayList<>();
     private static long nextId = 5;

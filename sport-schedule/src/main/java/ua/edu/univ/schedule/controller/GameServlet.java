@@ -1,5 +1,6 @@
 package ua.edu.univ.schedule.controller;
 
+import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,12 +13,12 @@ import ua.edu.univ.schedule.service.GameService;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @WebServlet("/games")
 public class GameServlet extends HttpServlet {
-    private final GameService gameService = new GameService();
+    @EJB //lab4
+    private GameService gameService;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
