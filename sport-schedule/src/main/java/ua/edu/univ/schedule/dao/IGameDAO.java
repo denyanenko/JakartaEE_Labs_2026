@@ -1,10 +1,12 @@
 package ua.edu.univ.schedule.dao;
 
+import jakarta.ejb.Local;
 import ua.edu.univ.schedule.model.Game;
 
 import java.util.List;
 import java.util.Optional;
 
+@Local
 public interface IGameDAO {
     Game create(Game game);
     Optional<Game> read(Long id);

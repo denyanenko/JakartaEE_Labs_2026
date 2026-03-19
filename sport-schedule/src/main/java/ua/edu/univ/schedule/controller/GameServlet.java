@@ -1,6 +1,5 @@
 package ua.edu.univ.schedule.controller;
 
-import jakarta.ejb.EJB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,7 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import ua.edu.univ.schedule.model.Game;
 import ua.edu.univ.schedule.model.GameResult;
 import ua.edu.univ.schedule.model.Team;
-import ua.edu.univ.schedule.service.GameService;
+import ua.edu.univ.schedule.service.IGameService;
+import jakarta.inject.Inject;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -17,8 +17,8 @@ import java.util.List;
 
 @WebServlet("/games")
 public class GameServlet extends HttpServlet {
-    @EJB //lab4
-    private GameService gameService;
+    @Inject
+    private IGameService gameService;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
