@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import ua.edu.univ.schedule.dto.ErrorResponse;
 import ua.edu.univ.schedule.model.Game;
 import ua.edu.univ.schedule.service.IGameService;
 
@@ -32,7 +33,10 @@ public class GameResource {
     public Response getGame(@PathParam("id") Long id) {
         return gameService.getGameById(id)
                 .map(game -> Response.ok(game).build())
-                .orElse(Response.status(Response.Status.NOT_FOUND).build());
+                .orElseGet(() -> {
+                    ErrorResponse error = new ErrorResponse(404, "Game not found");
+                    return Response.status(Response.Status.NOT_FOUND).entity(error).build();
+                });
     }
 
     @POST
@@ -46,7 +50,10 @@ public class GameResource {
     public Response updateGame(@PathParam("id") Long id, @Valid Game game) {
         return gameService.updateGame(id, game)
                 .map(updated -> Response.ok(updated).build())
-                .orElse(Response.status(Response.Status.NOT_FOUND).build());
+                .orElseGet(() -> {
+                    ErrorResponse error = new ErrorResponse(404, "Game not found");
+                    return Response.status(Response.Status.NOT_FOUND).entity(error).build();
+                });
     }
 
     @DELETE
@@ -55,7 +62,8 @@ public class GameResource {
         if (gameService.deleteGame(id)) {
             return Response.noContent().build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            ErrorResponse error = new ErrorResponse(404, "Game not found");
+            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
     }
 }
