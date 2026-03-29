@@ -3,3 +3,5 @@ out/
 target/
 *.class
 .smarttomcat
+.env
+src/main/webapp/WEB-INF/glassfish-resources.xml
