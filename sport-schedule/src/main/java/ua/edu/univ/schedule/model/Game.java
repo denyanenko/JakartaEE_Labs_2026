@@ -1,27 +1,39 @@
 package ua.edu.univ.schedule.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import ua.edu.univ.schedule.validation.DifferentTeams;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@Entity
+@Table(name = "games")
 @DifferentTeams
 public class Game {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "home_team_id", nullable = false)
     @NotNull(message = "Home team cannot be null")
     @Valid
     private Team homeTeam;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "away_team_id", nullable = false)
     @NotNull(message = "Away team cannot be null")
     @Valid
     private Team awayTeam;
 
+    @Column(name = "game_datetime", nullable = false)
     @NotNull(message = "Date and time cannot be null")
     private LocalDateTime dateTime;
 
+    @Embedded
     @Valid
     private GameResult result;
 

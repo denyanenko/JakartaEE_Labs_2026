@@ -1,16 +1,21 @@
 package ua.edu.univ.schedule.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.Min;
 
+@Embeddable
 public class GameResult {
-    private Long id;
-    
+
+    @Column(name = "home_score")
     @Min(value = 0, message = "Score cannot be negative")
     private int homeScore;
-    
+
+    @Column(name = "away_score")
     @Min(value = 0, message = "Score cannot be negative")
     private int awayScore;
-    
+
+    @Column(name = "is_completed")
     private boolean completed;
 
     public GameResult() {}
@@ -20,9 +25,6 @@ public class GameResult {
         this.awayScore = awayScore;
         this.completed = completed;
     }
-
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
 
     public int getHomeScore() { return homeScore; }
     public void setHomeScore(int homeScore) { this.homeScore = homeScore; }

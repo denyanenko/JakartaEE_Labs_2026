@@ -24,7 +24,7 @@ public class GameService implements IGameService {
         if (teamName == null || teamName.trim().isEmpty()) {
             return getAllGames();
         }
-        return gameDAO.searchByTeamName(teamName);
+        return gameDAO.searchByTeamName(teamName.trim());
     }
 
     @Override
