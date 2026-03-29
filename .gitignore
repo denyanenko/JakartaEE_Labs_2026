@@ -4,4 +4,4 @@ target/
 *.class
 .smarttomcat
 .env
-src/main/webapp/WEB-INF/glassfish-resources.xml
+sport-schedule/src/main/webapp/WEB-INF/glassfish-resources.xml
