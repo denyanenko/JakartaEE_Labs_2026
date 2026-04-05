@@ -33,10 +33,8 @@ public class GameResource {
     public Response getGame(@PathParam("id") Long id) {
         return gameService.getGameById(id)
                 .map(game -> Response.ok(game).build())
-                .orElseGet(() -> {
-                    ErrorResponse error = new ErrorResponse(404, "Game not found");
-                    return Response.status(Response.Status.NOT_FOUND).entity(error).build();
-                });
+                .orElseGet(() -> Response.status(Response.Status.NOT_FOUND)
+                        .entity(new ErrorResponse(404, "Game not found")).build());
     }
 
     @POST
@@ -45,15 +43,20 @@ public class GameResource {
         return Response.status(Response.Status.CREATED).entity(created).build();
     }
 
+    @POST
+    @Path("/batch")
+    public Response createGames(@Valid List<Game> games) {
+        List<Game> created = gameService.addGames(games);
+        return Response.status(Response.Status.CREATED).entity(created).build();
+    }
+
     @PUT
     @Path("/{id}")
     public Response updateGame(@PathParam("id") Long id, @Valid Game game) {
         return gameService.updateGame(id, game)
                 .map(updated -> Response.ok(updated).build())
-                .orElseGet(() -> {
-                    ErrorResponse error = new ErrorResponse(404, "Game not found");
-                    return Response.status(Response.Status.NOT_FOUND).entity(error).build();
-                });
+                .orElseGet(() -> Response.status(Response.Status.NOT_FOUND)
+                        .entity(new ErrorResponse(404, "Game not found")).build());
     }
 
     @DELETE
@@ -61,9 +64,8 @@ public class GameResource {
     public Response deleteGame(@PathParam("id") Long id) {
         if (gameService.deleteGame(id)) {
             return Response.noContent().build();
-        } else {
-            ErrorResponse error = new ErrorResponse(404, "Game not found");
-            return Response.status(Response.Status.NOT_FOUND).entity(error).build();
         }
+        return Response.status(Response.Status.NOT_FOUND)
+                .entity(new ErrorResponse(404, "Game not found")).build();
     }
 }

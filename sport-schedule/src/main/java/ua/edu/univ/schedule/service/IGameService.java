@@ -21,4 +21,6 @@ public interface IGameService {
     Optional<Game> updateGame(Long id, Game updatedGame);
 
     boolean deleteGame(Long id);
+
+    List<Game> addGames(List<Game> games);
 }

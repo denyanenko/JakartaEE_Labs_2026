@@ -9,10 +9,11 @@ import ua.edu.univ.schedule.dto.ErrorResponse;
 
 @Provider
 public class GlobalExceptionMapper implements ExceptionMapper<Throwable> {
-
+    private static final java.util.logging.Logger logger =
+            java.util.logging.Logger.getLogger(GlobalExceptionMapper.class.getName());
     @Override
     public Response toResponse(Throwable exception) {
-        exception.printStackTrace();
+        logger.log(java.util.logging.Level.SEVERE, "Unhandled exception", exception);
 
 
         if (exception instanceof WebApplicationException) {
