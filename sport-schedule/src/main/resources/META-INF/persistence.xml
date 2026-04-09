@@ -8,11 +8,9 @@
         <jta-data-source>java:app/jdbc/myScheduleDB</jta-data-source>
 
         <properties>
-            <property name="jakarta.persistence.schema-generation.database.action" value="update"/>
-
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
+            <property name="eclipselink.ddl-generation" value="none"/>
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+            <property name="eclipselink.logging.parameters" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>

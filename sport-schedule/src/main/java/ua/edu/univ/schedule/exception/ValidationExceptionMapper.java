@@ -6,7 +6,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
-import ua.edu.univ.schedule.dto.ErrorResponse; // Імпортуємо наш DTO
+import ua.edu.univ.schedule.dto.ErrorResponse;
 
 import java.util.stream.Collectors;
 
