@@ -18,7 +18,7 @@ public class GameDAO implements IGameDAO {
     private EntityManager em;
 
     private Team getOrCreateTeam(String teamName) {
-        TypedQuery<Team> query = em.createQuery("SELECT t FROM Team t WHERE t.name = :name", Team.class);
+        TypedQuery<Team> query = em.createNamedQuery("Team.findByName", Team.class);
         query.setParameter("name", teamName);
 
         List<Team> results = query.getResultList();
@@ -46,7 +46,7 @@ public class GameDAO implements IGameDAO {
 
     @Override
     public List<Game> readAll() {
-        return em.createQuery("SELECT g FROM Game g ORDER BY g.dateTime DESC", Game.class)
+        return em.createNamedQuery("Game.findAll", Game.class)
                 .getResultList();
     }
 
@@ -69,17 +69,14 @@ public class GameDAO implements IGameDAO {
 
     @Override
     public List<Game> searchByTeamName(String teamName) {
-        String jpql = "SELECT g FROM Game g WHERE g.homeTeam.name LIKE :name OR g.awayTeam.name LIKE :name";
-        return em.createQuery(jpql, Game.class)
+        return em.createNamedQuery("Game.findByTeamName", Game.class)
                 .setParameter("name", "%" + teamName + "%")
                 .getResultList();
     }
 
     @Override
     public List<Game> getPaged(int limit, int offset, String teamName) {
-        String jpql = "SELECT g FROM Game g WHERE (:name IS NULL OR g.homeTeam.name LIKE :name OR g.awayTeam.name LIKE :name) ORDER BY g.dateTime DESC";
-
-        TypedQuery<Game> query = em.createQuery(jpql, Game.class);
+        TypedQuery<Game> query = em.createNamedQuery("Game.findPaged", Game.class);
 
         String searchPattern = (teamName == null || teamName.trim().isEmpty()) ? null : "%" + teamName + "%";
         query.setParameter("name", searchPattern);

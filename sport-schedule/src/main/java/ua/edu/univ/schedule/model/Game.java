@@ -10,6 +10,11 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Table(name = "games")
 @DifferentTeams
+@NamedQueries({
+    @NamedQuery(name = "Game.findAll", query = "SELECT g FROM Game g ORDER BY g.dateTime DESC"),
+    @NamedQuery(name = "Game.findByTeamName", query = "SELECT g FROM Game g WHERE g.homeTeam.name LIKE :name OR g.awayTeam.name LIKE :name ORDER BY g.dateTime DESC"),
+    @NamedQuery(name = "Game.findPaged", query = "SELECT g FROM Game g WHERE (:name IS NULL OR g.homeTeam.name LIKE :name OR g.awayTeam.name LIKE :name) ORDER BY g.dateTime DESC")
+})
 public class Game {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
